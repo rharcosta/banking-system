@@ -1,12 +1,15 @@
 package cadastrocliente;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
-public class cadastroFisico extends javax.swing.JFrame {
+public class consultaCPF extends javax.swing.JFrame {
 
-    public cadastroFisico() {
+    String cpf;
+
+    public consultaCPF() {
         initComponents();
         jPanel1.setVisible(false);
     }
@@ -15,10 +18,6 @@ public class cadastroFisico extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        sexo = new javax.swing.ButtonGroup();
-        jLabel1 = new javax.swing.JLabel();
-        txtCPF = new javax.swing.JTextField();
-        btnOk = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
@@ -30,37 +29,27 @@ public class cadastroFisico extends javax.swing.JFrame {
         txtCidade = new javax.swing.JTextField();
         cbEstado = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
-        btnCadastrar = new javax.swing.JButton();
-        btnFechar = new javax.swing.JButton();
-        btnLimpar = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
+        btnNovo = new javax.swing.JButton();
+        btnAlterar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         txtCEP = new javax.swing.JTextField();
         txtNome = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        txtNum = new javax.swing.JTextField();
+        txtSexo = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         txtBairro = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        radioFem = new javax.swing.JRadioButton();
-        radioMasc = new javax.swing.JRadioButton();
-        radioOutro = new javax.swing.JRadioButton();
+        txtNum = new javax.swing.JTextField();
+        btnFechar = new javax.swing.JButton();
+        btnConsultar = new javax.swing.JButton();
+        txtCPF = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setText("Digite o CPF:");
-
-        txtCPF.setToolTipText("");
-
-        btnOk.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnOk.setText("Ok");
-        btnOk.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOkActionPerformed(evt);
-            }
-        });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("E-mail:");
@@ -80,28 +69,28 @@ public class cadastroFisico extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("Estado:");
 
-        btnCadastrar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnCadastrar.setText("Cadastrar");
-        btnCadastrar.setToolTipText("");
-        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+        btnExcluir.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnExcluir.setText("Excluir");
+        btnExcluir.setToolTipText("");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCadastrarActionPerformed(evt);
+                btnExcluirActionPerformed(evt);
             }
         });
 
-        btnFechar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnFechar.setText("Fechar");
-        btnFechar.addActionListener(new java.awt.event.ActionListener() {
+        btnNovo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnNovo.setText("Nova Consulta");
+        btnNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFecharActionPerformed(evt);
+                btnNovoActionPerformed(evt);
             }
         });
 
-        btnLimpar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btnLimpar.setText("Limpar");
-        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+        btnAlterar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnAlterar.setText("Alterar");
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLimparActionPerformed(evt);
+                btnAlterarActionPerformed(evt);
             }
         });
 
@@ -120,11 +109,13 @@ public class cadastroFisico extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel12.setText("Sexo:");
 
-        radioFem.setText("Feminino");
-
-        radioMasc.setText("Masculino");
-
-        radioOutro.setText("Outro");
+        btnFechar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnFechar.setText("Fechar");
+        btnFechar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFecharActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -149,10 +140,8 @@ public class cadastroFisico extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(radioFem)
                                     .addComponent(txtCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(radioMasc)
-                                    .addComponent(radioOutro))
+                                    .addComponent(txtSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(46, 46, 46)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,11 +165,13 @@ public class cadastroFisico extends javax.swing.JFrame {
                 .addGap(154, 154, 154))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnNovo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnFechar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnLimpar)
+                .addComponent(btnAlterar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnCadastrar)
+                .addComponent(btnExcluir)
                 .addGap(132, 132, 132))
         );
         jPanel1Layout.setVerticalGroup(
@@ -209,60 +200,76 @@ public class cadastroFisico extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
-                    .addComponent(radioFem)
                     .addComponent(txtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(radioMasc)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(radioOutro)
-                        .addGap(19, 19, 19)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(txtCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(41, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnFechar)
-                            .addComponent(btnLimpar)
-                            .addComponent(btnCadastrar))
-                        .addContainerGap())))
+                    .addComponent(jLabel11)
+                    .addComponent(txtSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel7)
+                    .addComponent(txtCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnNovo)
+                    .addComponent(btnAlterar)
+                    .addComponent(btnExcluir)
+                    .addComponent(btnFechar))
+                .addContainerGap())
         );
+
+        btnConsultar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnConsultar.setText("Consultar");
+        btnConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarActionPerformed(evt);
+            }
+        });
+
+        txtCPF.setToolTipText("");
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setText("Digite o CPF:");
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel2.setText("CONSULTA POR CPF");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(124, 124, 124)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnOk))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(124, 124, 124)
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnConsultar))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(207, 207, 207)
+                                .addComponent(jLabel2)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
                     .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1)
-                        .addComponent(btnOk, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                    .addComponent(btnConsultar, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -280,62 +287,116 @@ public class cadastroFisico extends javax.swing.JFrame {
         txtNum.setText(null);
         txtBairro.setText(null);
         cbEstado.setSelectedIndex(0);
-        sexo.clearSelection();
+        txtSexo.setText(null);
         txtCPF.grabFocus();
         jPanel1.setVisible(false);
     }
-    private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
-        validaCPF val = new validaCPF();
-        String cpf;
-        cpf = txtCPF.getText();
 
-        if (val.isCPF(cpf) == true) {
-            txtCPF.setText(val.imprimeCPF(cpf));
-            jPanel1.setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(null, "CPF inválido! Digite novamente");
-            txtCPF.setText(null);
-            txtCPF.grabFocus();
-        }
-    }//GEN-LAST:event_btnOkActionPerformed
-
-    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         conexao conbd = new conexao();
         if (conbd.getConnection()) {
             try {
-                String query = "INSERT INTO tabcliente(cpf,nome,email,celular,sexo,cidade,estado,cep,rua,bairro,num)VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+                String query = "DELETE FROM tabcliente WHERE cpf=?";
                 PreparedStatement stmt = conbd.con.prepareStatement(query);
                 stmt.setString(1, txtCPF.getText());
-                stmt.setString(2, txtNome.getText());
-                stmt.setString(3, txtEmail.getText());
-                stmt.setString(4, txtCelular.getText());
-                stmt.setString(5, sexo.getSelection().getActionCommand());
-                stmt.setString(6, txtCidade.getText());
-                stmt.setString(7, cbEstado.getSelectedItem().toString());
-                stmt.setString(8, txtCEP.getText());
-                stmt.setString(9, txtRua.getText());
-                stmt.setString(10, txtBairro.getText());
-                stmt.setString(11, txtNum.getText());
-                stmt.executeUpdate();
-                JOptionPane.showMessageDialog(this, "Dados Salvos!!!");
+                int resposta = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja excluir o registro?");
+                if (resposta == JOptionPane.YES_OPTION) {
+                    stmt.executeUpdate();
+                    JOptionPane.showMessageDialog(this, "Registro excluido!!!");
+                    jPanel1.setVisible(false);
+                    txtCPF.setText(null);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Registro não excluído!!!!");
+                }
                 stmt.close();
                 conbd.close();
-                limpar();
             } catch (SQLException e) {
-                JOptionPane.showMessageDialog(null, "Erro comando SQL" + e.getMessage());
+                JOptionPane.showMessageDialog(null, "Erro comando SQL:" + e.getMessage());
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Erro ao conectar!");
+            JOptionPane.showMessageDialog(this, "Erro ao conectar");
         }
-    }//GEN-LAST:event_btnCadastrarActionPerformed
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
+        limpar();
+    }//GEN-LAST:event_btnNovoActionPerformed
+
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        conexao conbd = new conexao();
+        if (conbd.getConnection()) {
+            try {
+                String query = "UPDATE tabcliente SET nome=?, email=?, celular=?, sexo=?, cidade=?, estado=?, cep=?, rua=?, bairro=?, num=? WHERE cpf=?";
+                PreparedStatement stmt = conbd.con.prepareStatement(query);
+                stmt.setString(1, txtNome.getText());
+                stmt.setString(2, txtEmail.getText());
+                stmt.setString(3, txtCelular.getText());
+                stmt.setString(4, txtSexo.getText());
+                stmt.setString(5, txtCidade.getText());
+                stmt.setString(6, cbEstado.getSelectedItem().toString());
+                stmt.setString(7, txtCEP.getText());
+                stmt.setString(8, txtRua.getText());
+                stmt.setString(9, txtBairro.getText());
+                stmt.setString(10, txtNum.getText());
+                stmt.executeUpdate();
+                JOptionPane.showMessageDialog(this, "Dados Atualizados!!!");
+                stmt.close();
+                conbd.close();
+            } catch (SQLException e) {
+                JOptionPane.showMessageDialog(null, "Erro comando SQL:" + e.getMessage());
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Erro ao Conectar!");
+        }
+    }//GEN-LAST:event_btnAlterarActionPerformed
+
+    private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
+        validaCPF val = new validaCPF();
+        cpf = txtCPF.getText();
+        if (val.isCPF(cpf)) {
+            txtCPF.setText(val.imprimeCPF(cpf));
+            jPanel1.setVisible(true);
+            boolean consulta = false;
+            conexao conbd = new conexao();
+            if (conbd.getConnection()) {
+                try {
+                    String query = "SELECT* FROM tabcliente WHERE cpf=?";
+                    PreparedStatement stmt = conbd.con.prepareStatement(query);
+                    stmt.setString(1, txtCPF.getText());
+
+                    ResultSet RS = stmt.executeQuery();
+                    while (RS.next()) {
+                        txtNome.setText(RS.getString("nome"));
+                        txtEmail.setText(RS.getString("email"));
+                        txtCelular.setText(RS.getString("celular"));
+                        txtSexo.setText(RS.getString("sexo"));
+                        txtCidade.setText(RS.getString("cidade"));
+                        cbEstado.setSelectedItem(RS.getString("estado"));
+                        txtCEP.setText(RS.getString("cep"));
+                        txtRua.setText(RS.getString("rua"));
+                        txtBairro.setText(RS.getString("bairro"));
+                        txtNum.setText(RS.getString("num"));
+                        consulta = true;
+                        jPanel1.setVisible(true);
+                    }
+                    if (!consulta) {
+                        JOptionPane.showMessageDialog(this, "Dados não encontrados!", "Consulta", JOptionPane.PLAIN_MESSAGE);
+                        txtCPF.setText(null);
+                        txtCPF.grabFocus();
+                    }
+                    RS.close();
+                    stmt.close();
+                    conbd.close();
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(this, "Erro Comando SQL" + e.getMessage());
+                }
+            }
+        }
+    }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void btnFecharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFecharActionPerformed
         dispose();
     }//GEN-LAST:event_btnFecharActionPerformed
-
-    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
-        limpar();
-    }//GEN-LAST:event_btnLimparActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -348,37 +409,47 @@ public class cadastroFisico extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(cadastroFisico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(consultaCPF.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(cadastroFisico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(consultaCPF.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(cadastroFisico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(consultaCPF.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(cadastroFisico.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(consultaCPF.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new cadastroFisico().setVisible(true);
+                new consultaCPF().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCadastrar;
+    private javax.swing.JButton btnAlterar;
+    private javax.swing.JButton btnConsultar;
+    private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnFechar;
-    private javax.swing.JButton btnLimpar;
-    private javax.swing.JButton btnOk;
+    private javax.swing.JButton btnNovo;
     private javax.swing.JComboBox<String> cbEstado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -387,10 +458,6 @@ public class cadastroFisico extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton radioFem;
-    private javax.swing.JRadioButton radioMasc;
-    private javax.swing.JRadioButton radioOutro;
-    private javax.swing.ButtonGroup sexo;
     private javax.swing.JTextField txtBairro;
     private javax.swing.JTextField txtCEP;
     private javax.swing.JTextField txtCPF;
@@ -400,5 +467,6 @@ public class cadastroFisico extends javax.swing.JFrame {
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtNum;
     private javax.swing.JTextField txtRua;
+    private javax.swing.JTextField txtSexo;
     // End of variables declaration//GEN-END:variables
 }
